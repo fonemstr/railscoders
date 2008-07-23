@@ -7,13 +7,13 @@ ActiveRecord::Schema.define(:version => 25) do
   create_table "articles", :force => true do |t|
     t.column "user_id",      :integer
     t.column "title",        :string
-    t.column "synopsis",     :text,     :limit => 1000
-    t.column "body",         :text,     :limit => 20000
-    t.column "published",    :boolean,                   :default => false
+    t.column "synopsis",     :text
+    t.column "body",         :text
+    t.column "published",    :boolean,  :default => false
     t.column "created_at",   :datetime
     t.column "updated_at",   :datetime
     t.column "published_at", :datetime
-    t.column "category_id",  :integer,                   :default => 1
+    t.column "category_id",  :integer,  :default => 1
   end
 
   create_table "categories", :force => true do |t|
@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(:version => 25) do
     t.column "updated_at", :datetime
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "taggings", :force => true do |t|
     t.column "tag_id",        :integer
@@ -171,8 +171,8 @@ ActiveRecord::Schema.define(:version => 25) do
   add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
 
   create_table "users", :force => true do |t|
-    t.column "username",         :string,   :limit => 64,                    :null => false
-    t.column "email",            :string,   :limit => 128,                   :null => false
+    t.column "username",         :string,   :limit => 64,  :default => "",   :null => false
+    t.column "email",            :string,   :limit => 128, :default => "",   :null => false
     t.column "hashed_password",  :string,   :limit => 64
     t.column "enabled",          :boolean,                 :default => true, :null => false
     t.column "profile",          :text
